@@ -1,0 +1,10 @@
+.Ingridient {
+    text-align: center;
+    margin: 5px;
+}
+
+.Ingridient img {
+    width: 200px;
+    padding-bottom: 0%;
+    padding-top: 0%;
+}
