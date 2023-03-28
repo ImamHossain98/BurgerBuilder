@@ -2,7 +2,18 @@ import React, { Component } from 'react';
 import Burger from './Burger/Burger';
 import Controls from './Controls/Controls';
 import Summary from './Summary/Summary';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
+
+
+export function BurgerBuilderWithRouter(props) {
+    const history = useNavigate()
+    return (<BurgerBuilder history={history}></BurgerBuilder>)
+}
+
+
+
+
 
 const INGRIDIENT_PRICES = {
     sasuage: 50,
@@ -11,7 +22,15 @@ const INGRIDIENT_PRICES = {
     latus: 20
 }
 
+
+
 class BurgerBuilder extends Component {
+
+
+
+    componentDidMount() {
+        console.log(this.props)
+    }
 
     state = {
         ingredients: [
@@ -24,6 +43,7 @@ class BurgerBuilder extends Component {
         modalOpen: false,
         purchasable: false,
     }
+
 
     updatePurchaseable = ingredients => {
         const sum = ingredients.reduce((sum, element) => {
@@ -64,6 +84,16 @@ class BurgerBuilder extends Component {
         })
     }
 
+
+
+
+    handleCheckout = () => {
+
+        this.props.history("/checkout")
+    }
+
+
+
     render() {
         return (
             <div>
@@ -85,7 +115,7 @@ class BurgerBuilder extends Component {
                         <Summary ingredients={this.state.ingredients} />
                     </ModalBody>
                     <ModalFooter>
-                        <Button color='success' onClick={this.toggleModal}>Continue to checkout</Button>
+                        <Button color='success' onClick={this.handleCheckout}>Continue to checkout</Button>
                         <Button color='secondary' onClick={this.toggleModal}>Cancel</Button>
                     </ModalFooter>
 
